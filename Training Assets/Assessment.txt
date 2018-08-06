@@ -1,0 +1,15 @@
+1.display all emp names frm emp table adding a new col count as per dept and count the people from the dept wher that emp is working 
+	select ename ,(select count(deptno) from emp d where d.deptno=e.deptno) as staff from emp e
+
+2. write a q to disp all the emo names , sal job wise giving a subtotal on the salaries based on the job 
+	select ename, sal,job,(select sum(sal)  from emp e where e.job=d.job) as tsum from emp d order by job
+
+3.write a q to display emp names and a new col called no_of_stars and add that many stars as per length of the name for each emp
+	select ename,character_length(ename) as stars  from emp 
+
+4. Display emp detials who is getting 2nd max sal from table 
+	select * from emp where sal=(select max(sal) from emp where sal not in (select max(sal) from emp))
+	
+5. disp emp name who is get max salfrom that dept where max memebers are working 
+
+

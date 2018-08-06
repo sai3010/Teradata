@@ -1,0 +1,19 @@
+1) select ename,sal,job,deptno from emp where comm is null
+
+2) select count(dname) as cnt_emp,dname from dept d ,emp e 
+where e.deptno=d.deptno and ename !='KING' group by dname  
+order by dname desc 
+
+3)SELECT 
+   Ename, deptno,
+CASE Deptno 
+   WHEN 10 THEN sal*1.1 
+   WHEN 20 THEN sal*1.2 
+   WHEN 30 THEN sal*1.3
+ELSE 'Invalid Dept'
+   END AS sal 
+FROM emp; 
+
+4)select ENAME, emp.DEPTNO, DNAME, LOC, GRADE, sal+comm as INCSAL  from emp,dept,salgrade
+5)select ename, monthname(hiredate) as mon from emp 
+ORDER BY extract(month from hiredate)

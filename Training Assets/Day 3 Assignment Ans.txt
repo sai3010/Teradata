@@ -1,0 +1,23 @@
+database samples;
+CREATE SET TABLE Customer_details ,FALLBACK ( 
+   Custid INTEGER Primary key not null,
+   Customer_name VARCHAR(20), 
+   Address VARCHAR(30), 
+   Date_of_birth DATE FORMAT 'YYYY-MM-DD' not null,
+   Telno varchar(10)  not null
+   )
+insert into Customer_details values(1,'sagar','hyderabad','23/12/1990',9087654321)
+
+1)update  Customer_details set address='Mumbai' where Custid =1 or Custid =2
+2)select Date_of_birth from Customer_details where Date_of_birth in (select min(Date_of_birth) from Customer_details)
+3)select customer_name from customer_details where   YEAR(Date_of_birth)  in any(select YEAR(Date_of_birth) from customer_details)
+4)select Customer_name from Customer_details where address like '%PUR'
+5)select sum(balance) from Customer_details
+6)create view interest as 
+select balance* 0.01 as int_to_pay from customer_details;
+select * from interest
+7)delete from customer_details where balance<3000
+8)select customer_name from customer_details where balance = (select max(balance) from customer_details )
+9)CREATE MACRO updtaetel(cuid  INTEGER,tno INTEGER) AS ( 
+  update customer_details set telno=:tno where custid=:cuid ;)
+  exec updtaetel(2,123456)

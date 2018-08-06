@@ -1,0 +1,21 @@
+1) SELECT ACCOUNTNAME, USERNAME, SUM(CPUTIME) AS CPU, SUM(DISKIO) AS DISKIO FROM DBC.AMPUSAGE GROUP BY 1,2 
+2)SELECT CURRENTPERM as ACTUALSPACE FROM DBC.TABLESIZE
+WHERE DATABASENAME = any(select DatabaseName  from dbc.tables);
+3)select 
+databasename, 
+tablename,
+currentperm as current_GB
+from dbc.allspace 
+where tablename <> 'All'
+and databasename = any(select DatabaseName  from dbc.tables);
+
+4)select sum (currentperm)/1024**3 as current_GB from dbc.allspace 
+5)select (sum(maxperm)/1024**3) -(sum (currentperm)/1024**3) as leftoverGB from dbc.allspace 
+6)SELECT DatabaseName ,SUM(CurrentPerm)/1024/1024 AS USEDSPACE_IN_MB ,SUM(MaxPerm)/1024/1024 AS MAXSPACE_IN_MB ,SUM(CurrentPerm)/ NULLIFZERO (SUM(MaxPerm)) *100 (FORMAT 'zz9.99%') AS Percentage_Used  ,MAXSPACE_IN_MB- USEDSPACE_IN_MB AS REMAININGSPACE_IN_MB FROM DBC.DiskSpace
+WHERE DatabaseName = any(select DatabaseName  from dbc.tables)
+GROUP BY DatabaseName;
+8)select AccountName  from DBC.diskspace where peakspool>6000000
+10)SELECT DATABASENAME, TABLENAME, CURRENTPERM
+FROM DBC.TABLESIZE 
+WHERE DATABASENAME =any(select DatabaseName  from dbc.tables); AND TABLENAME like 'emp';
+GROUP BY DATABASENAME , TABLENAME;
